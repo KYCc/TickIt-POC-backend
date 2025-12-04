@@ -23,4 +23,9 @@ public class EditLog
     public TimeEntry TimeEntry { get; set; } = null!;
     [Required]
     public Guid TimeEntryId { get; set; }
+    
+    public string GetSummary()
+    {
+        return $"{EditedAt}: Changed hours worked from {PreviousHoursWorked} to {NewHoursWorked} by {EditedBy.Name}. Reason: {Reason}";
+    }
 }
