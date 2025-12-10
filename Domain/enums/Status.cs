@@ -1,6 +1,6 @@
-﻿namespace Domain;
+﻿namespace Domain.enums;
 
 public enum Status
 {
-    Apporoved, Denied
+    Submitted, Approved, Denied
 }

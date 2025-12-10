@@ -1,27 +1,41 @@
-﻿using DAL.interfaces;
+﻿using DAL.EF;
+using DAL.interfaces;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL;
 
 public class UserRepository : IUserRepository
 {
-    public User? GetById(int id)
+    private TickItDbContext dbContext;
+
+    public UserRepository(TickItDbContext dbContext)
     {
-        throw new NotImplementedException();
+        this.dbContext = dbContext;
+    }
+    
+    public async Task<User?> GetById(Guid id)
+    {
+       return await dbContext.Users.FindAsync(id);
     }
 
-    public IEnumerable<User> GetAll()
+    public async Task<IEnumerable<User>> GetAll()
     {
-        throw new NotImplementedException();
+        return await dbContext.Users.AsNoTracking().ToListAsync();
     }
 
-    public void Add(User user)
+    public async Task Add(User user)
     {
-        throw new NotImplementedException();
+        await dbContext.Users.AddAsync(user);
+        await dbContext.SaveChangesAsync();
     }
 
-    public void DeleteById(int id)
+    public async Task DeleteById(Guid id)
     {
-        throw new NotImplementedException();
+        var user = await GetById(id);
+        if (user == null) return;
+        
+        dbContext.Users.Remove(user);
+        await dbContext.SaveChangesAsync();
     }
 }

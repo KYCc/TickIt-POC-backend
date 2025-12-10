@@ -4,8 +4,8 @@ namespace DAL.interfaces;
 
 public interface IBusinessRepository
 {
-    public Business? GetById(int id);
-    public IEnumerable<Business> GetAll();
-    public void Add(Business business);
-    public void DeleteById(int id);
+    public Task<Business?> GetById(Guid id);
+    public Task<IEnumerable<Business>> GetAll();
+    public Task Add(Business business);
+    public Task DeleteById(Guid id);
 }
