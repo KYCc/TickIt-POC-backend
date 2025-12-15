@@ -7,7 +7,7 @@ namespace DAL;
 
 public class TimeEntryRepository : ITimeEntryRepository
 {
-    private TickItDbContext dbContext;
+    private readonly TickItDbContext dbContext;
 
     public TimeEntryRepository(TickItDbContext dbContext)
     {

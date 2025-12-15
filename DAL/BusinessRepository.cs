@@ -14,6 +14,7 @@ public class BusinessRepository : IBusinessRepository
         this.dbContext = dbContext;
     }
     
+    // Retrieves a Business entity by its unique identifier without Users.
     public async Task<Business?> GetById(Guid id)
     {
         return await dbContext.Businesses.FindAsync(id);

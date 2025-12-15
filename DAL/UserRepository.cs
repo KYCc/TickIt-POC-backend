@@ -7,7 +7,7 @@ namespace DAL;
 
 public class UserRepository : IUserRepository
 {
-    private TickItDbContext dbContext;
+    private readonly TickItDbContext dbContext;
 
     public UserRepository(TickItDbContext dbContext)
     {

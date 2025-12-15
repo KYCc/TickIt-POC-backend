@@ -7,7 +7,7 @@ namespace DAL;
 
 public class EditLogRepository : IEditLogRepository
 {
-    private TickItDbContext dbContext;
+    private readonly TickItDbContext dbContext;
 
     public EditLogRepository(TickItDbContext dbContext)
     {
