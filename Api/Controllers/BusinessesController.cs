@@ -44,11 +44,13 @@ public class BusinessesController : ControllerBase
         return Ok(dto);
     }
 
+    //TODO return CreatedAtAction
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] string businessName)
     {
         try
         {
+            if (string.IsNullOrWhiteSpace(businessName)) return BadRequest();
             await _businessService.Add(businessName);
             return Ok();
         }
@@ -65,11 +67,11 @@ public class BusinessesController : ControllerBase
         try
         {
             await _businessService.DeleteById(id);
-            return Ok();
+            return NoContent(); // 204 
         }
         catch (Exception e)
         {
-            _logger.LogError("{Message}", e.Message);
+            _logger.LogError("Error deleting business with ID {Id}", id);
             return BadRequest();
         }
     }
